@@ -1,5 +1,5 @@
 -- ==============================================================================
--- Proyecto RetailPro: Módulo 5 - Consultas con JOINs
+-- Proyecto RetailPro: Módulo 5 - Consultas con JOINs (Refactorizado)
 -- Archivo: m5_consultas_joins.sql
 -- ==============================================================================
 
@@ -24,7 +24,6 @@ INNER JOIN clientes c ON v.id_cliente = c.id_cliente
 INNER JOIN productos p ON v.id_producto = p.id_producto
 INNER JOIN categorias cat ON p.id_categoria = cat.id_categoria
 INNER JOIN territorios t ON v.id_territorio = t.id_territorio;
-
 -- ==============================================================================
 -- Consulta 2 — Clientes sin ventas (LEFT JOIN)
 -- ==============================================================================
@@ -47,28 +46,20 @@ FROM productos p
 INNER JOIN categorias cat ON p.id_categoria = cat.id_categoria
 LEFT JOIN ventas v ON p.id_producto = v.id_producto
 WHERE v.id_venta IS NULL;
-
--- ==============================================================================
--- Consulta 4 — Consolidado por canal (UNION ALL)
--- ==============================================================================
+-- ==========================================================
+-- Consulta 4 - Consolidado por período de tiempo (UNION ALL)
+-- Con control de nulos para presentación ejecutiva
+-- ==========================================================
 SELECT 
-    canal,
-    SUM(total_venta) AS total_por_canal
-FROM (
-    SELECT 
-        id_venta, 
-        (cantidad * precio_unitario) AS total_venta, 
-        'Online' AS canal
-    FROM ventas 
-    WHERE canal = 'Online'
-    
-    UNION ALL
-    
-    SELECT 
-        id_venta, 
-        (cantidad * precio_unitario) AS total_venta, 
-        'Presencial' AS canal
-    FROM ventas 
-    WHERE canal = 'Presencial'
-) AS consolidado_canales
-GROUP BY canal;
+    'Primer Trimestre (Q1)' AS periodo_analisis,
+    ISNULL(SUM(cantidad * precio_unitario), 0) AS facturacion_total
+FROM ventas
+WHERE fecha_venta BETWEEN '2024-01-01' AND '2024-03-31'
+
+UNION ALL
+
+SELECT 
+    'Segundo Trimestre (Q2)' AS periodo_analisis,
+    ISNULL(SUM(cantidad * precio_unitario), 0) AS facturacion_total
+FROM ventas
+WHERE fecha_venta BETWEEN '2024-04-01' AND '2024-06-30';
