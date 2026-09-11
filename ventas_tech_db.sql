@@ -12,10 +12,10 @@
 -- ==============================================================================
 
 CREATE DATABASE Ventas_Tech_DB;
-
+GO
 
 USE Ventas_Tech_DB;
-
+GO
 
 -- ==============================================================================
 -- CREATE TABLES (Orden de creación según dependencias)
