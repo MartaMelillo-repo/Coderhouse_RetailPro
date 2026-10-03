@@ -19,7 +19,7 @@ El objetivo es analizar información comercial relacionada con ventas de product
 
 La base utilizada en el proyecto se denomina:
 
-Ventas_Tech_DB
+ventas_tech_db
 
 Contiene información relacionada con:
 
@@ -58,7 +58,7 @@ Para reproducir el proyecto:
 
 1. Abrir SQL Server Management Studio.
 2. Ejecutar `ventas_tech_db.sql`.
-3. Verificar que la base `Ventas_Tech_DB` haya sido creada correctamente.
+3. Verificar que la base `ventas_tech_db` haya sido creada correctamente.
 4. Ejecutar `m4_consultas_negocio.sql`.
 5. Ejecutar `m5_consultas_joins.sql`.
 6. Verificar los resultados obtenidos.
