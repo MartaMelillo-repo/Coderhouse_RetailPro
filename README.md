@@ -29,7 +29,7 @@ preparación de datos y trabajo en Power BI.
 
 ## Base de datos
 
-El script inicial crea la base `Ventas_Tech_DB` y las tablas:
+El script inicial crea la base `ventas_tech_DB` y las tablas:
 
 - `categorias`
 - `clientes`
